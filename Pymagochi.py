@@ -8,82 +8,73 @@ class Pymagochi:
     coco = False
 
     #Funções para alterar os estatos
-    def aumentaComida(self, valorAumento):
+    def aumenta_comida(self, valorAumento):
         self.comida += valorAumento
         if self.comida > 10:
             self.comida = 10
         return
 
-    def diminuiComida(self, valorAumento):
+    def diminui_comida(self, valorAumento):
         self.comida -= valorAumento
         if self.comida < 0:
             self.comida = 0
         return
 
-    def aumentaBebida(self, valorAumento):
+    def aumenta_bebida(self, valorAumento):
         self.bebida += valorAumento
         if self.bebida > 10:
             self.bebida = 10
         return
 
-    def diminuiBebida(self, valorAumento):
+    def diminui_bebida(self, valorAumento):
         self.bebida -= valorAumento
         if self.bebida < 0:
             self.bebida = 0
         return
 
-    def aumentaFelicidade(self, valorAumento):
+    def aumenta_felicidade(self, valorAumento):
         self.felicidade += valorAumento
         if self.felicidade > 10:
             self.felicidade = 10
         return
 
-    def diminuiFelicidade(self, valorAumento):
+    def diminui_felicidade(self, valorAumento):
         self.felicidade -= valorAumento
         if self.felicidade < 0:
             self.felicidade = 0
         return
 
-    def aumentaEnergia(self, valorAumento):
+    def aumenta_energia(self, valorAumento):
         self.energia += valorAumento
         if self.energia > 10:
             self.energia = 10
         return
 
-    def diminuiEnergia(self, valorAumento):
+    def diminui_energia(self, valorAumento):
         self.energia -= valorAumento
         if self.energia < 0:
             self.energia = 0
         return
 
-    def aumentaBanheiro(self, valorAumento):
+    def aumenta_banheiro(self, valorAumento):
         self.banheiro += valorAumento
         if self.banheiro > 10:
             self.banheiro = 10
         return
 
-    def diminuiBanheiro(self, valorAumento):
+    def diminui_banheiro(self, valorAumento):
         self.banheiro -= valorAumento
         if self.banheiro < 0:
             self.ebanheiro = 0
         return
 
     # Funções de display de status
-    def displayComida(self):
-        text = ""
-        for c in range (self.comida):
-            text += "*"
-            #print(text)
-        return text
 
-
-
-
-
-    def mostraStatus(self):
+    def mostraStatus(self): #debug
         print(f'Comida: {self.comida}')
         print(f'Bebida: {self.bebida}')
         print(f'Felicidade: {self.felicidade}')
         print(f'Energia: {self.energia}')
+        print(f'Banheiro: {self.banheiro}')
         print("-----------------")
 
