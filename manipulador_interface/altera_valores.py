@@ -1,44 +1,44 @@
 from random import randint
+from Pymagochi import Pymagochi
 
 ## Funções de Event Handler (ativadas com o botão)
-def aumentar_comida(elemento, label):
-    elemento.aumenta_comida(randint(1,5))
-    label['text'] = elemento.comida
+def aumentar_comida(elemento):
+    Pymagochi.aumenta_comida(elemento,randint(1,5))
 
-def aumentar_bebida(elemento,label):
-    elemento.aumenta_bebida(randint(2,8))
-    label['text'] = elemento.bebida
+def aumentar_bebida(elemento):
+    Pymagochi.aumenta_bebida(elemento, randint(2,8))
+    
 
-def aumentar_felicidade(elemento,label):
-    elemento.aumenta_felicidade(randint(1,8))
-    label['text'] = elemento.felicidade
+def aumentar_felicidade(elemento):
+    Pymagochi.aumenta_felicidade(elemento, randint(1,8))
+    
 
-def aumentar_energia(elemento,label):
-    elemento.aumenta_energia(randint(1,5))
-    label['text'] = elemento.energia
+def aumentar_energia(elemento):
+    Pymagochi.aumenta_energia(elemento, randint(1,5))
+   
 
-def aumentar_banheiro(elemento,label):
-    elemento.aumenta_banheiro(randint(8,10))
-    label['text'] =elemento.banheiro
+def aumentar_banheiro(elemento):
+    Pymagochi.aumenta_banheiro(elemento, randint(8,10))
+    
 
 
 ## Funções de decremento dos valores padrão que serão instanciadas em threads
-def diminuir_comida(elemento,label):
-    elemento.diminui_comida(randint(1,5))
-    label['text'] = elemento.comida
+def diminuir_comida(elemento):
+    Pymagochi.diminui_comida(elemento, randint(1,5))
+    
 
-def diminuir_bebida(elemento,label):
-    elemento.diminui_bebida(randint(2,8))
-    label['text'] = elemento.bebida
+def diminuir_bebida(elemento):
+   Pymagochi.diminui_bebida(elemento, randint(2,8))
+    
 
-def diminuir_felicidade(elemento,label):
-    elemento.diminui_felicidade(randint(1,8))
-    label['text'] = elemento.felicidade
+def diminuir_felicidade(elemento):
+   Pymagochi.diminui_felicidade(elemento, randint(1,8))
+    
 
-def diminuir_energia(elemento,label):
-    elemento.diminui_energia(randint(1,5))
-    label['text'] = elemento.energia
+def diminuir_energia(elemento):
+   Pymagochi.diminui_energia(elemento, randint(1,5))
+   
 
-def diminuir_banheiro(elemento,label):
-    elemento.diminui_banheiro(randint(8,10))
-    label['text'] = elemento.banheiro
+def diminuir_banheiro(elemento):
+    Pymagochi.diminui_banheiro(randint(8,10))
+   
