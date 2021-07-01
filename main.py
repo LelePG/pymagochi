@@ -2,22 +2,29 @@ from Pymagochi import Pymagochi
 from Temporizador import Temporizador
 from manipulador_interface import altera_valores as av
 from manipulador_interface import cria_threads as ct
+from manipulador_interface import cria_elementos as ce
 from tkinter import * # importa a biblioteca gráfica
 from random import randint
 from tkinter import messagebox
  
+# constantes
+TEMPO_ATUALIZAR_INTERFACE = 0.25
+TEMPO_DECREMENTAR_STATUS = 0.5
 
 ## Variáveis do programa
-
-pymagochi = Pymagochi() # inicia o objeto tamagochi
+pymagochi = Pymagochi("teste.png") # inicia o objeto tamagochi
 
 janela = Tk() # inicializa uma janela com base nas definições da biblioteca
 janela.geometry("600x350")#define as dimensões da janela
 
-frame1 = Frame(janela) #cria o frame que compõe a janela
-frame1.pack(side=BOTTOM)
+frame_principal = Frame(janela) #cria o frame que compõe a janela
+frame_principal.pack(side=BOTTOM)
 
-status = { ## Objeto auxiliar para a criação da interface com os valores corretos.
+pymagochi_foto = PhotoImage(file = pymagochi.imagem) #Coloca a imagem na janela
+label_imagem = Label(janela, image  = pymagochi_foto)
+label_imagem.pack()
+
+status = { ## Map auxiliar para a criação da interface com os valores corretos.
     0:["Comida", "Alimentar", av.aumentar_comida, pymagochi.comida],
     1:["Bebida", "Beber", av.aumentar_bebida, pymagochi.bebida],
     2:["Felicidade", "Brincar", av.aumentar_felicidade, pymagochi.felicidade],
@@ -25,21 +32,21 @@ status = { ## Objeto auxiliar para a criação da interface com os valores corre
     4:["Banheiro", "Banheiro", av.aumentar_banheiro,pymagochi.banheiro],
 }
 
-## Funções de criação de elementos
-def criar_label(frame,titulo_label, linha, coluna):
-    l = Label(frame, text=titulo_label)
-    l.grid(row = linha, column = coluna)
-    return l
-
-def criar_btn(frame, texto_btn, funcao, linha, coluna):
-    return Button(frame,text = texto_btn, command = lambda: funcao(pymagochi)).grid(row = linha, column = coluna)
-
 ##Labels de estado
-label_comida_status = criar_label(frame1,status[0][3],1,0)
-label_bebida_status = criar_label(frame1,status[1][3],1,1)
-label_felicidade_status = criar_label(frame1,status[2][3],1,2)
-label_energia_status = criar_label(frame1,status[3][3],1,3)
-label_banheiro_status = criar_label(frame1,status[4][3],1,4)
+label_comida_status = ce.criar_label(frame_principal,status[0][3],1,0)
+label_bebida_status = ce.criar_label(frame_principal,status[1][3],1,1)
+label_felicidade_status = ce.criar_label(frame_principal,status[2][3],1,2)
+label_energia_status = ce.criar_label(frame_principal,status[3][3],1,3)
+label_banheiro_status = ce.criar_label(frame_principal,status[4][3],1,4)
+
+def monitorar_interface():
+    if not pymagochi.esta_vivo():
+        print("a")
+        #messagebox.showwarning("RIP", "Você deixou o Pymagochi morrer")# mostra mensagem de erro
+        #janela.destroy()
+    elif pymagochi.banheiro_zerado():
+        messagebox.showwarning("Aconteceu um acidente", "Limpe a caixa de areia do pymagochi")
+        pymagochi.banheiro = 10
 
 def atualizar_interface():
     label_comida_status['text'] = pymagochi.comida
@@ -47,44 +54,31 @@ def atualizar_interface():
     label_felicidade_status['text'] = pymagochi.felicidade
     label_energia_status['text'] = pymagochi.energia
     label_banheiro_status['text'] = pymagochi.banheiro
-    if not pymagochi.esta_vivo():
-        messagebox.showwarning("RIP", "Você deixou o Pymagochi morrer")# mostra mensagem de erro
-        janela.destroy()
-
+    monitorar_interface()
 
 def decrementar_status(): # eu queria utilizar um switch, mas não tem em python
-    elemento_principal = pymagochi
     status_dec = randint(0,4)
     if status_dec == 0:
-        av.diminuir_comida(elemento_principal)
+        av.diminuir_comida(pymagochi)
     elif status_dec == 1:
-        av.diminuir_bebida(elemento_principal)
+        av.diminuir_bebida(pymagochi)
     elif status_dec == 2:
-        av.diminuir_felicidade(elemento_principal)
+        av.diminuir_felicidade(pymagochi)
     elif status_dec == 3:
-        av.diminuir_energia(elemento_principal)
+        av.diminuir_energia(pymagochi)
     elif status_dec == 4:
-        av.diminuir_banheiro(elemento_principal)
+        av.diminuir_banheiro(pymagochi)
     else:
         print("Problema encontrado")
 
-   
-
-
-k= PhotoImage(file = "teste.png") #Coloca a imagem na janela
-lImagem = Label(janela, image = k)
-lImagem.pack()
 
 for i in range (len(status)): # cria a interface
-    label_item = criar_label(frame1,status[i][0],0,i)
-    btn_item = criar_btn(frame1,status[i][1], status[i][2], 2,i)
+    label_item = ce.criar_label(frame_principal,status[i][0],0,i)
+    btn_item = ce.criar_btn(frame_principal,pymagochi,status[i][1], status[i][2], 2,i)
 
 #Threads
-atualiza_interface = ct.minhaThread(0.25, atualizar_interface)
-atualiza_interface.roda_funcao()
-
-decrementa_status = ct.minhaThread(0.5, decrementar_status)
-decrementa_status.roda_funcao()
+ct.minhaThread(TEMPO_ATUALIZAR_INTERFACE, atualizar_interface).roda_funcao()
+ct.minhaThread(TEMPO_DECREMENTAR_STATUS, decrementar_status).roda_funcao()
 
 
 ##Falta: uma thread pra cada botão, verificar se o tamagochi morreu.
