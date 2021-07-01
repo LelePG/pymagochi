@@ -1,10 +1,10 @@
 class Pymagochi:
     # Status
-    comida = 0
-    bebida = 0
-    felicidade = 0
-    energia = 0
-    banheiro = 0
+    comida = 10
+    bebida = 10
+    felicidade = 10
+    energia = 10
+    banheiro = 10
     coco = False
 
     #Funções para alterar os estatos
@@ -65,9 +65,11 @@ class Pymagochi:
     def diminui_banheiro(self, valorAumento):
         self.banheiro -= valorAumento
         if self.banheiro < 0:
-            self.ebanheiro = 0
+            self.banheiro = 0
         return
 
+    def esta_vivo(self):
+        return self.comida and self.bebida and self.energia and self.felicidade and self.banheiro
     # Funções de display de status
 
     def mostraStatus(self): #debug
