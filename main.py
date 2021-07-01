@@ -1,5 +1,4 @@
 from Pymagochi import Pymagochi
-from Temporizador import Temporizador
 from manipulador_interface import altera_valores as av
 from manipulador_interface import cria_threads as ct
 from manipulador_interface import cria_elementos as ce
@@ -7,7 +6,7 @@ from tkinter import * # importa a biblioteca gráfica
 from tkinter import messagebox
 from random import randint
 import time
- 
+
 # constantes
 TEMPO_ATUALIZAR_INTERFACE = 0.25
 TEMPO_DECREMENTAR_STATUS = 0.5
@@ -28,7 +27,7 @@ label_imagem.pack()
 
 status = { ## Map auxiliar para a criação da interface com os valores corretos.
     0:["Comida", "Alimentar", av.aumentar_comida, pymagochi.comida],
-    1:["Bebida", "Beber", av.aumentar_bebida, pymagochi.bebida],
+    1:["Bebida", "Dar água", av.aumentar_bebida, pymagochi.bebida],
     2:["Felicidade", "Brincar", av.aumentar_felicidade, pymagochi.felicidade],
     3:["Energia", "Dormir", av.aumentar_energia, pymagochi.energia],
     4:["Banheiro", "Banheiro", av.aumentar_banheiro,pymagochi.banheiro],
@@ -72,20 +71,16 @@ def decrementar_status(): # eu queria utilizar um switch, mas não tem em python
         av.diminuir_banheiro(pymagochi)
     else:
         print("Problema encontrado")
-
     monitorar_interface()
 
-#Threads
-thread_atualiza_interface = ct.minhaThread(TEMPO_ATUALIZAR_INTERFACE, atualizar_interface)
-thread_decrementa_status = ct.minhaThread(TEMPO_DECREMENTAR_STATUS, decrementar_status)
 
 for i in range (len(status)): # cria a interface
     label_item = ce.criar_label(frame_principal,status[i][0],0,i)
     btn_item = ce.criar_btn(frame_principal,pymagochi,status[i][1], status[i][2], 2,i)
 
 
-thread_atualiza_interface.roda_funcao()
-thread_decrementa_status.roda_funcao()
+ct.minhaThread(TEMPO_ATUALIZAR_INTERFACE, atualizar_interface).roda_funcao()
+ct.minhaThread(TEMPO_DECREMENTAR_STATUS, decrementar_status).roda_funcao()
 
 janela.mainloop()#inicia a janela
 
