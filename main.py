@@ -5,7 +5,6 @@ from manipulador_interface import cria_elementos as ce
 from tkinter import * # importa a biblioteca gráfica
 from tkinter import messagebox
 from random import randint
-import time
 
 # constantes
 TEMPO_ATUALIZAR_INTERFACE = 0.25
@@ -13,17 +12,20 @@ TEMPO_DECREMENTAR_STATUS = 0.5
 TEMPO_VISUALIZA_CAIXA = 5
 
 ## Variáveis do programa
-pymagochi = Pymagochi("teste.png") # inicia o objeto tamagochi
+pymagochi = Pymagochi("imagens/pymagochi.png") # inicia o objeto tamagochi
 
 janela = Tk() # inicializa uma janela com base nas definições da biblioteca
 janela.geometry("600x350")#define as dimensões da janela
 
-frame_principal = Frame(janela) #cria o frame que compõe a janela
+fundo = PhotoImage(file = "imagens/fundo.png")# imagem de fundo
+Label(janela, image = fundo).place(x = 0, y = 0)
+
+frame_principal = Frame(janela, bg = "#764c22") #cria o frame que compõe a janela
 frame_principal.pack(side=BOTTOM)
 
 pymagochi_foto = PhotoImage(file = pymagochi.imagem) #Coloca a imagem na janela
-label_imagem = Label(janela, image  = pymagochi_foto)
-label_imagem.pack()
+label_imagem = Label(janela, image  = pymagochi_foto, borderwidth=0)
+label_imagem.place(x = 250, y = 160)
 
 status = { ## Map auxiliar para a criação da interface com os valores corretos.
     0:["Comida", "Alimentar", av.aumentar_comida, pymagochi.comida],
