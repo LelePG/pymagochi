@@ -1,5 +1,4 @@
 import threading
-from threading import Timer
 import os
 
 class minhaThread(threading.Thread):
@@ -11,8 +10,11 @@ class minhaThread(threading.Thread):
     def roda_funcao(self): # Para selecionar e rodar a função, é assim mesmo
         try:
             self.funcao_callback() #declara a função
-            self.thread = Timer(self.tempo_atualizacao, self.roda_funcao) #cria a thread que vai rodar a função
+            self.thread = threading.Timer(self.tempo_atualizacao, self.roda_funcao) #cria a thread que vai rodar a função
             self.thread.start() #inicia a execução
         except:
             self.thread.cancel()
-            os._exit(1) #Finaliza o programa, de uma forma meio forçada, mas finaliza.
+            os._exit(1)
+
+
+

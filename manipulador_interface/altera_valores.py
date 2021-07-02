@@ -1,7 +1,6 @@
 from random import randint
 from Pymagochi import Pymagochi
 
-
 def definir_entidade(entidade):
     elemento_principal = entidade
 
