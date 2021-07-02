@@ -46,6 +46,8 @@ label_energia_status = ce.criar_label(frame_principal,status[3][3],1,3)
 label_banheiro_status = ce.criar_label(frame_principal,status[4][3],1,4)
 
 def monitorar_interface():
+    """Monitora as alterações feitas na interface para lidar com as condições onde o Pymagochi está
+    morto, ou precisou ir ao banheiro de maneira emergencial"""
     if not pymagochi.esta_vivo():
         tm.finalizar()
         messagebox.showwarning("RIP", "Você deixou o Pymagochi morrer")# mostra mensagem de erro
@@ -57,6 +59,7 @@ def monitorar_interface():
         time.sleep(TEMPO_VISUALIZA_CAIXA)
 
 def atualizar_interface():
+    """Atualiza as labels referentes aos status do Pymagochi"""
     label_comida_status['text'] = pymagochi.comida
     label_bebida_status['text'] = pymagochi.bebida
     label_felicidade_status['text'] = pymagochi.felicidade
@@ -64,6 +67,7 @@ def atualizar_interface():
     label_banheiro_status['text'] = pymagochi.banheiro   
 
 def decrementar_status(): # eu queria utilizar um switch, mas não tem em python
+    """Decrementa algum dos status do Pymagochi"""
     status_dec = randint(0,4)
     if status_dec == 0:
         av.diminuir_comida(pymagochi)
@@ -91,4 +95,3 @@ ct.minhaThread(TEMPO_DECREMENTAR_STATUS, decrementar_status).roda_funcao()
 janela.mainloop()#inicia a janela
 
 
-    

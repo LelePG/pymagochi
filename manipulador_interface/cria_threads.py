@@ -12,7 +12,7 @@ class minhaThread(threading.Thread):
             self.funcao_callback() #declara a função
             self.thread = threading.Timer(self.tempo_atualizacao, self.roda_funcao) #cria a thread que vai rodar a função
             self.thread.start() #inicia a execução
-        except:
+        except: # se contecer algum problema, fecha o programa.
             self.thread.cancel()
             os._exit(1)
 
