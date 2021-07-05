@@ -6,7 +6,7 @@
 Este projeto se trata de uma interface gráfica criada em python com a biblioteca **tkinter** que simula o comportamento de um Tamagochi, onde você precisa cuidar do Pymagochi, alimentando-o, dando água para ele, fazendo com que ele durma, etc.  
 
 ## Como utilizar esse projeto?
-Para brincar com o Pymagochi, basta fazer o donwload do repositório digitando `https://github.com/LelePG/pymagochi.git` no terminal, ou fazendo o download do arquivo .zip clicando no botão verde `code`.
+Para brincar com o Pymagochi, basta fazer o donwload do repositório digitando `git clone https://github.com/LelePG/pymagochi.git` no terminal, ou fazendo o download do arquivo .zip clicando no botão verde `code`.
 
 Para rodar o programa, basta rodar o comando `python3 main.py` dentro da pasta onde este arquivo se encontra. Isso abrirá a interface gráfica que mostra o Pymagochi, seus status e botões para que você interaja com os status aumentando-os quando eles estiverem muito baixos.
 
