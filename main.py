@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from Pymagochi import Pymagochi
 from manipulador_interface import altera_valores as av
 from manipulador_interface import cria_threads as ct
@@ -9,9 +11,9 @@ from random import randint
 import time
 
 
-# constantes
+# constantes que podem ser alteradas para personalizar a experiência do jogo
 TEMPO_ATUALIZAR_INTERFACE = 0.25
-TEMPO_DECREMENTAR_STATUS = 0.5
+TEMPO_DECREMENTAR_STATUS = 7
 TEMPO_VISUALIZA_CAIXA = 5
 
 ## Variáveis do programa
